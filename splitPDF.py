@@ -7,11 +7,13 @@ import os
 
 def usage():
   print ("Usage: splitPDF.py [args]\n\n" + 
-         "\t--- Short ---\n"
-         "\t-i <input_file>\n" +
+         "\t--- Short ---\n" +
+         "\t-h                    // for help\n" +
+         "\t-i <input_file>       // to set input\n" +
          "\n" +
          "\t--- Long  ---\n" +
-         "\t--input <input_file>\n")
+         "\t--help                // for help\n" +
+         "\t--input <input_file>  // to set input\n")
 
 def request_info(pdfLoaded):
   pages = pdfLoaded.getNumPages()
@@ -102,7 +104,7 @@ def split_pages(src, dst):
   output = pyPdf.PdfFileWriter()
   
   spage, sline, layout = request_info(input)
-  lpage = spage / sline
+  lpage = math.floor(spage / sline)
   
   if not (spage % sline == 0):
     lpage = lpage + 1
@@ -140,10 +142,12 @@ def main():
 
   if src_e != ".pdf":
     print ("\n--- Input file not pdf!---\n")
+    sys.exit()
 
-  dst = src_n + "-changed.pdf"
+  dst = src_n + "-1up.pdf"
 
-  print ("\nProcessing the pdf called " + src_n + " into " + dst + "\n")
+  print ("\nProcessing the pdf called " + os.path.basename(src) \
+        + " into " + os.path.basename(dst) + "\n")
 
   split_pages(src,dst)
 

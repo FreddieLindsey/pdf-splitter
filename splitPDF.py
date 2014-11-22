@@ -17,6 +17,7 @@ def request_info(pdfLoaded):
   pages = pdfLoaded.getNumPages()
   print ("There are " + str(pages) + " pages in your document.\n")
   num = input("How many slides are there per page?\n")
+  numline = 1
   if num > 2:
     numline = input("How many slides are there per line?\n")
 
